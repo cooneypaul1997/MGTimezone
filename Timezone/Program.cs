@@ -18,7 +18,7 @@ namespace Timezone
 
                 foreach (var t in lTimes)
                 {
-                    Console.WriteLine(t.Item1 + " " + t.Item2);
+                    Console.WriteLine("The time in the UK is {0} and the time in {1} is {2}", t.Item1, t.Item2, timeZoneParser.DisplayTime(t.Item1, t.Item2).TimeOfDay);
                 }
             }
         }
