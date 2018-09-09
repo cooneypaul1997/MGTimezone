@@ -11,14 +11,36 @@ namespace Timezone
     {
         public List<Tuple<string, string>> Read()
         {
+            string fileName = "Timezone.txt";
+
             List<Tuple<string, string>> lReturn = new List<Tuple<string, string>>();
 
-            if(!File.Exists("Timezone.txt"))
+            if(!File.Exists(fileName))
             {
                 return lReturn;
             }
 
-            string[] fileParts = File.ReadAllText("Timezone.txt").Replace("\n", "\r\n").Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            string[] fileParts;
+
+            try
+            {
+                fileParts = File.ReadAllText(fileName).Replace("\n", "\r\n").Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            }
+            catch(FileNotFoundException ex)
+            {
+                Console.WriteLine("Can't find file {0} with exception " + ex.ToString(), fileName);
+                return lReturn;
+            }
+            catch(DirectoryNotFoundException ex)
+            {
+                Console.WriteLine("Can't find directory containing file {0} with exception " + ex.ToString(), fileName);
+                return lReturn;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Exception whilst trying to read Timezone.txt " + ex.ToString());
+                return lReturn;
+            }
 
             foreach (string part in fileParts)
             {
