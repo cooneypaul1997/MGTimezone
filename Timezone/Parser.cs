@@ -14,7 +14,7 @@ namespace Timezone
             string[] splitTime = time.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
 
             // Add the Hours and Minutes into a 00:00 DateTime 
-            DateTime UTCTime = new DateTime();
+            DateTime UTCTime = new DateTime(1900, 01, 01); // If Date is 01/01/0001, any timezones < base UTC e.g -7 will not calculate correctly as this is the lowest DateTime can be.
             UTCTime = UTCTime.AddHours(Convert.ToDouble(splitTime[0]));
             UTCTime = UTCTime.AddMinutes(Convert.ToDouble(splitTime[1]));
 
