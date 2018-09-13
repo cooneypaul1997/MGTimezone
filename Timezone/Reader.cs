@@ -42,13 +42,16 @@ namespace Timezone
                 return lReturn;
             }
 
-            foreach (string part in fileParts)
+            if(fileParts.Length > 0)
             {
-                string[] sLineParts = part.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string part in fileParts)
+                {
+                    string[] sLineParts = part.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                Tuple<string, string> timeZone = new Tuple<string, string>(sLineParts.First(), sLineParts.Last());
+                    Tuple<string, string> timeZone = new Tuple<string, string>(sLineParts.First(), sLineParts.Last());
 
-                lReturn.Add(timeZone);
+                    lReturn.Add(timeZone);
+                }
             }
 
             return lReturn;

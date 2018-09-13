@@ -16,17 +16,28 @@ namespace Timezone
             {
                 List<Tuple<string, string>> lTimes = fileReader.Read();
 
-                foreach (var t in lTimes)
+                if (lTimes.Count > 0)
                 {
-                    // Ensure that {time} or t.Item1 is a valid double or do not process it
-                    string originalTime = t.Item1.Replace(":", ".");
-                    double time;
-                    bool isDouble = Double.TryParse(originalTime, out time);
-
-                    if(isDouble)
+                    foreach (var t in lTimes)
                     {
-                        Console.WriteLine("The time in the UK is {0} and the time in {1} is {2}", t.Item1, t.Item2, timeZoneParser.DisplayTime(t.Item1, t.Item2).TimeOfDay);
+                        // Ensure that {time} or t.Item1 is a valid double or do not process it
+                        string originalTime = t.Item1.Replace(":", ".");
+                        double time;
+                        bool isDouble = Double.TryParse(originalTime, out time);
+
+                        if (isDouble)
+                        {
+                            Console.WriteLine("The time in the UK is {0} and the time in {1} is {2}", t.Item1, t.Item2, timeZoneParser.DisplayTime(t.Item1, t.Item2).TimeOfDay);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid data for timezone {0}", t.Item2);
+                        }
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Timezone.txt file is empty or invalid");
                 }
             }
         }
