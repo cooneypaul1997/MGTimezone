@@ -34,5 +34,13 @@ namespace Timezone
 
             return convertedTime;
         }
+
+        // Ensure that {time} is a valid double
+        public bool ValidateTime(string time)
+        {
+            bool isDouble = Double.TryParse(time.Replace(":", "."), out double processedTime);
+
+            return isDouble;
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace Timezone
     interface IParser
     {
         DateTime DisplayTime(string time, string timezone);
+
+        bool ValidateTime(string time);
     }
 }

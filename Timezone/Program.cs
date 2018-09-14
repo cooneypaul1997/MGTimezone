@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Timezone
 {
     class Program
-    {        
+    {
         static void Main(string[] args)
         {
             Parser timeZoneParser = new Parser();
@@ -20,12 +20,7 @@ namespace Timezone
                 {
                     foreach (var t in lTimes)
                     {
-                        // Ensure that {time} or t.Item1 is a valid double or do not process it
-                        string originalTime = t.Item1.Replace(":", ".");
-                        double time;
-                        bool isDouble = Double.TryParse(originalTime, out time);
-
-                        if (isDouble)
+                        if (timeZoneParser.ValidateTime(t.Item1))
                         {
                             Console.WriteLine("The time in the UK is {0} and the time in {1} is {2}", t.Item1, t.Item2, timeZoneParser.DisplayTime(t.Item1, t.Item2).TimeOfDay);
                         }
